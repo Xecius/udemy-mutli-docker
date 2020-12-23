@@ -1,4 +1,6 @@
 sudo: required
+language: generic
+
 services:
  - docker
  
@@ -9,14 +11,14 @@ script:
  - docker run -e CI=true achaigne/react-test npm test
 
 after_success:
- - docker build -t achaigne/multi-client ./client
- - docker build -t achaigne/multi-nginx ./nginx
- - docker build -t achaigne/multi-server ./server
- - docker build -t achaigne/multi-worker ./worker
+ - docker build -t xecius/multi-client ./client
+ - docker build -t xecius/multi-nginx ./nginx
+ - docker build -t xecius/multi-server ./server
+ - docker build -t xecius/multi-worker ./worker
  # login 
  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
  # push to docker hub 
- - docker push achaigne/multi-client
- - docker push achaigne/multi-nginx 
- - docker push achaigne/multi-server
- - docker push achaigne/multi-worker
+ - docker push xecius/multi-client
+ - docker push xecius/multi-nginx 
+ - docker push xecius/multi-server
+ - docker push xecius/multi-worker
