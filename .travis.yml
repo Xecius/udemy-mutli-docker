@@ -10,9 +10,9 @@ script:
 
 after_success:
  - docker build -t achaigne/multi-client ./client
- - docker build -t achaigne/multi-nginx ./client
- - docker build -t achaigne/multi-server ./client
- - docker build -t achaigne/multi-worker ./client
+ - docker build -t achaigne/multi-nginx ./nginx
+ - docker build -t achaigne/multi-server ./server
+ - docker build -t achaigne/multi-worker ./worker
  # login 
  - echo "%DOCKER_PASSWORD" | docker login -u "%DOCKER_ID" -- password-stin
  # push to docker hub 
