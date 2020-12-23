@@ -1,0 +1,22 @@
+sudo: required
+services:
+ - docker
+ 
+before_install:
+ - docker build -t achaigne/react-test -f ./client/Dockerfile.dev ./client
+ 
+script:
+ - docker run achaigne/react-test npm test -- --coverage
+
+after_success:
+ - docker build -t achaigne/multi-client ./client
+ - docker build -t achaigne/multi-nginx ./client
+ - docker build -t achaigne/multi-server ./client
+ - docker build -t achaigne/multi-worker ./client
+ # login 
+ - echo "%DOCKER_PASSWORD" | docker login -u "%DOCKER_ID" -- password-stin
+ # push to docker hub 
+ - docker push achaigne/multi-client
+ - docker push achaigne/multi-nginx 
+ - docker push achaigne/multi-server
+ - docker push achaigne/multi-worker
