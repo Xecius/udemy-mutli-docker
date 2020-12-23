@@ -14,7 +14,7 @@ after_success:
  - docker build -t achaigne/multi-server ./server
  - docker build -t achaigne/multi-worker ./worker
  # login 
- - echo "%DOCKER_PASSWORD" | docker login -u "%DOCKER_ID" -- password-stin
+ - echo "%DOCKER_PASSWORD" | docker login -u "%DOCKER_ID" --password-stin
  # push to docker hub 
  - docker push achaigne/multi-client
  - docker push achaigne/multi-nginx 
